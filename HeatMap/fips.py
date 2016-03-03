@@ -15,8 +15,7 @@ fipsCount = dict ()
 with open ('test.tsv', 'rb') as csvfile:
 	locreader = csv.DictReader(csvfile, delimiter = '\t')
 	for row in locreader:
-		fipsCount[row['id']] = 0.01
-
+		fipsCount[int(row['id'])] = 0.01
 
 with open ('../student_locations.csv', 'rb') as csvfile:
 	locreader = csv.DictReader(csvfile, delimiter = ',')
@@ -36,13 +35,13 @@ with open ('../student_locations.csv', 'rb') as csvfile:
 			print "NO fip code for this zip:", cur
 			continue
 		if fipCode not in fipsCount:
-			fipsCount[fipCode] = 0
-		fipsCount[fipCode] += 1
+			fipsCount[int(fipCode)] = 0.01
+		fipsCount[int(fipCode)] += 1
 
 with open("result.tsv", "w") as record_file:
     record_file.write("id\trate\n")
-    for key, value in fipsCount.items():
-        record_file.write(str(key)+"\t"+str(value)+"\n")
+    for key in sorted(fipsCount.iterkeys()):
+        record_file.write(str(key)+"\t"+str(fipsCount[key])+"\n")
 
 
 
