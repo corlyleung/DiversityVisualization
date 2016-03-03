@@ -14,13 +14,35 @@
 
 .q0-9 { fill:rgb(247,251,255); }
 .q1-9 { fill:rgb(222,235,247); }
-.q2-9 { fill:rgb(198,219,239); }
-.q3-9 { fill:rgb(158,202,225); }
-.q4-9 { fill:rgb(107,174,214); }
-.q5-9 { fill:rgb(66,146,198); }
-.q6-9 { fill:rgb(33,113,181); }
-.q7-9 { fill:rgb(8,81,156); }
-.q8-9 { fill:rgb(8,48,107); }
+.q2-9 { fill:rgb(222,235,247); }
+.q3-9 { fill:rgb(222,235,247); }
+.q4-9 { fill:rgb(222,235,247); }
+.q5-9 { fill:rgb(198,219,239); }
+.q6-9 { fill:rgb(198,219,239); }
+.q7-9 { fill:rgb(198,219,239); }
+.q8-9 { fill:rgb(198,219,239); }
+.q9-9 { fill:rgb(158,202,225); }
+.q10-9 { fill:rgb(158,202,225); }
+.q11-9 { fill:rgb(158,202,225); }
+.q12-9 { fill:rgb(158,202,225); }
+.q13-9 { fill:rgb(107,174,214); }
+.q14-9 { fill:rgb(107,174,214); }
+.q15-9 { fill:rgb(107,174,214); }
+.q16-9 { fill:rgb(107,174,214); }
+.q17-9 { fill:rgb(66,146,198); }
+.q18-9 { fill:rgb(66,146,198); }
+.q19-9 { fill:rgb(66,146,198); }
+.q20-9 { fill:rgb(66,146,198); }
+.q21-9 { fill:rgb(33,113,181); }
+.q22-9 { fill:rgb(33,113,181); }
+.q23-9 { fill:rgb(33,113,181); }
+.q24-9 { fill:rgb(33,113,181); }
+.q25-9 { fill:rgb(8,81,156); }
+.q25-9 { fill:rgb(8,81,156); }
+.q26-9 { fill:rgb(8,81,156); }
+.q27-9 { fill:rgb(8,81,156); }
+.q28-9 { fill:rgb(8,81,156); }
+.q29-9 { fill:rgb(8,48,107); }
 
 </style>
 <body>
@@ -36,7 +58,7 @@ var rateById = d3.map();
 
 var quantize = d3.scale.quantize()
     .domain([0, .27])
-    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+    .range(d3.range(30).map(function(i) { return "q" + i + "-9"; }));;
 
 var projection = d3.geo.albersUsa()
     .scale(1280)

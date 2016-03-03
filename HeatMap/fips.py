@@ -12,7 +12,7 @@ with open('zip_county.csv', 'rb') as csvfile:
 fipsCount = dict ()
 total = 0.00
 for cur in zipdict.itervalues():
-	fipsCount[cur] = 0
+	fipsCount[cur] = 0.01
 
 
 with open ('../student_locations.csv', 'rb') as csvfile:
@@ -31,15 +31,14 @@ with open ('../student_locations.csv', 'rb') as csvfile:
 			continue
 		fipCode = zipdict[cur]
 		fipsCount[fipCode] += 1
-		total += 1.00
 
 writer = csv.writer(open('result.tsv', 'wb'))
-writer.writerow(["id", "rate"])
+writer.writerow("id\trate")
 max = 0.00
 for key, value in fipsCount.items():
-	writer.writerow([key, str(float(value)/total)])
-	if (float(value)/ total > max):
-		max = float(value)/total
+	writer.writerow([key, value])
+	if (float(value) > max):
+		max = float(value)
 print max
 
 
