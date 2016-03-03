@@ -34,7 +34,8 @@ with open ('../student_locations.csv', 'rb') as csvfile:
 		if cur not in zipdict:
 			print "NO fip code for this zip:", cur
 			continue
-		if fipCode not in fipsCount:
+		if int(fipCode) not in fipsCount:
+			print 'hi'
 			fipsCount[int(fipCode)] = 0.01
 		fipsCount[int(fipCode)] += 1
 
