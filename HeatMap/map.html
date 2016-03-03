@@ -73,7 +73,7 @@ var svg = d3.select("body").append("svg")
 
 queue()
     .defer(d3.json, "https://raw.githubusercontent.com/corlyleung/DiversityVisualization/master/HeatMap/us.json")
-    .defer(d3.tsv, "https://raw.githubusercontent.com/corlyleung/DiversityVisualization/master/HeatMap/test.tsv", function(d) { rateById.set(d.id, +d.rate); })
+    .defer(d3.tsv, "https://raw.githubusercontent.com/corlyleung/DiversityVisualization/master/HeatMap/result.tsv", function(d) { rateById.set(d.id, +d.rate); })
     .await(ready);
 
 function ready(error, us) {

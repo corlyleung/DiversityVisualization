@@ -33,7 +33,7 @@ with open ('../student_locations.csv', 'rb') as csvfile:
 		fipsCount[fipCode] += 1
 
 writer = csv.writer(open('result.tsv', 'wb'))
-writer.writerow("id\trate")
+writer.writerow(["id","rate"])
 max = 0.00
 for key, value in fipsCount.items():
 	writer.writerow([key, value])
