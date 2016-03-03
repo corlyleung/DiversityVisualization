@@ -26,20 +26,30 @@ with open ('../student_locations.csv', 'rb') as csvfile:
 			cur = row['Zip']
 			if '-' in cur:
 				cur = cur[:cur.index('-')]
+		fipCode = zipdict[cur]
+		if (int(fipCode) < 10000):
+			fipCode = fipCode[1:]
 		if cur not in zipdict:
 			print "NO fip code for this zip:", cur
 			continue
-		fipCode = zipdict[cur]
+		if fipCode not in fipsCount:
+			fipsCount[fipCode] = 0
 		fipsCount[fipCode] += 1
 
-writer = csv.writer(open('result.tsv', 'wb'), delimiter='\t')
+with open("result.tsv", "w") as record_file:
+    record_file.write("id\trate\n")
+    for key, value in fipsCount.items():
+        record_file.write(str(key)+"\t"+str(value)+"\n")
+
+'''writer = csv.writer(open('result.tsv', 'wb'), delimiter='\t')
 writer.writerow(["id","rate"])
+
 max = 0.00
 for key, value in fipsCount.items():
 	writer.writerow([key, value])
 	if (float(value) > max):
 		max = float(value)
-print max
+print max'''
 
 
 
