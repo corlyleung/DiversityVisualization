@@ -25,18 +25,25 @@ def get_class_info(path):
 	class_percentage = {}
 	for cur in female_count:
 		class_percentage[cur] = female_count[cur]/total_count[cur]
-	res_key = heapq.nlargest(20 ,class_percentage, key = lambda k: class_percentage[k])
+	res_key = heapq.nlargest(10 ,class_percentage, key = lambda k: class_percentage[k])
 
 	res_list = []
 	res_percentage = []
 	for cur in res_key:
+		print cur, class_percentage[cur]
 		res_list.append(cur)
 		res_percentage.append(class_percentage[cur])
-	print res_list, "\n",res_percentage
-	
+	#print res_list, "\n",res_percentage
+	print '/n'
+	res_key = heapq.nsmallest(8 ,class_percentage, key = lambda k: class_percentage[k])
 
-
-			
+	res_list = []
+	res_percentage = []
+	for cur in res_key:
+		print cur, class_percentage[cur]
+		res_list.append(cur)
+		res_percentage.append(class_percentage[cur])
+	print res_list[::-1], "\n",res_percentage[::-1]
 
 if __name__ == "__main__":
     path = "../gender10_enrollment.xlsx"

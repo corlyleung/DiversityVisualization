@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dsnap - Charts</title>
+  <style>
+  #xaxis .domain {
+    fill:none;
+    stroke:#000;
+  }
+  #xaxis text, #yaxis text {
+    font-size: 12px;
+  }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+  </div>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script>
+    var categories= ['','565-HCI', '519-Scientific Visulization', '548-Cognitive Processes', '512-Advanced Data Mining', '467-Social Visulization', '546-ML & NLP','556- MultiGrid Methods','461-Computer Security I', '431-Embedded Systems', ' 429-SWEII', '460-Security Laboratory', '494-Senior Project II', '424-Real Time System', '414-Multimedia System', '528-OOP and Design'];
+
+    console.log(categories.length);
+
+    var dollars = [0.310, 0.274, 0.267, 0.262, 0.259, 0.238, 0.226, 0.087, 0.082, 0.082, 0.063,0.061,0.049,0.024,0.019];
+
+    console.log(dollars.length);
+
+    var colors = ['#0000b4','#0082ca','#0094ff','#0d4bcf','#0066AE','#074285','#00187B','#285964','#405F83','#416545','#4D7069','#6E9985','#7EBC89','#0283AF','#79BCBF','#99C19E'];
+    console.log(colors.length);
+
+    var grid = d3.range(33).map(function(i){
+      return {'x1':0,'y1':0,'x2':0,'y2':480};
+    });
+
+    var tickVals = grid.map(function(d,i){
+      if(i>0){ return i*0.01; }
+      else if(i===0){ return "100";}
+    });
+
+    var xscale = d3.scale.linear()
+            .domain([0, .33])
+            .range([0,722]);
+
+    var yscale = d3.scale.linear()
+            .domain([0,categories.length])
+            .range([0,480]);
+
+    var colorScale = d3.scale.quantize()
+            .domain([0,categories.length])
+            .range(colors);
+
+    var canvas = d3.select('#wrapper')
+            .append('svg')
+            .attr({'width':900,'height':550});
+
+    var grids = canvas.append('g')
+              .attr('id','grid')
+              .attr('transform','translate(150,10)')
+              .selectAll('line')
+              .data(grid)
+              .enter()
+              .append('line')
+              .attr({'x1':function(d,i){ return i*30; },
+                 'y1':function(d){ return d.y1; },
+                 'x2':function(d,i){ return i*30; },
+                 'y2':function(d){ return d.y2; },
+              })
+              .style({'stroke':'#adadad','stroke-width':'1px'});
+
+    var xAxis = d3.svg.axis();
+      xAxis
+        .orient('bottom')
+        .scale(xscale)
+        .tickValues(tickVals);
+
+    var yAxis = d3.svg.axis();
+      yAxis
+        .orient('left')
+        .scale(yscale)
+        .tickSize(2)
+        .tickFormat(function(d,i){ return categories[i]; })
+        .tickValues(d3.range(21));
+
+    var y_xis = canvas.append('g')
+              .attr("transform", "translate(150,0)")
+              .attr('id','yaxis')
+              .call(yAxis);
+
+    var x_xis = canvas.append('g')
+              .attr("transform", "translate(150,480)")
+              .attr('id','xaxis')
+              .call(xAxis);
+
+    var chart = canvas.append('g')
+              .attr("transform", "translate(150,0)")
+              .attr('id','bars')
+              .selectAll('rect')
+              .data(dollars)
+              .enter()
+              .append('rect')
+              .attr('height',19)
+              .attr({'x':0,'y':function(d,i){ return yscale(i)+19; }})
+              .style('fill',function(d,i){ return colorScale(i); })
+              .attr('width',function(d){ return 0; });
+
+    var transit = d3.select("svg").selectAll("rect")
+                .data(dollars)
+                .transition()
+                .duration(1000) 
+                .attr("width", function(d) {return xscale(d); });
+
+    var transitext = d3.select('#bars')
+              .selectAll('text')
+              .data(dollars)
+              .enter()
+              .append('text')
+              .attr({'x':function(d) {return xscale(d)-200; },'y':function(d,i){ return yscale(i)+35; }});
+  </script>
+</body>
+</html>
