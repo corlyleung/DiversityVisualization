@@ -17,20 +17,9 @@
         shape-rendering: crispEdges;
       }
     </style>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-45101494-1']);
-    _gaq.push(['_setDomainName', 'delimited.io']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
   </head>
   <body>
-    <h2 style="padding-left:60px;">TPercentage of Female in Different Tracks</h2>
+    <h2 style="padding-left:60px;">Retention by Class</h2>
     <script src="lib/d3.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.js"></script>
@@ -58,8 +47,8 @@
           .x(function (d) { return x(d.label) + x.rangeBand() / 2; })
           .y(function (d) { return y(d.value); });
 
-      var color = d3.scale.ordinal()
-          .range(["E8D0A9", "B7AFA3",  "C1DAD6",  "#a5d2d2",  "ACD1E9",  "6D929B","#d3c47c"]);
+      var color = d3.scale.ordinal().range(["ff6f69","d88cb6","87c6c3","468499"])
+          //.range(["E8D0A9", "B7AFA3",  "C1DAD6",  "#a5d2d2",  "ACD1E9",  "6D929B","#d3c47c"]);
 
       var svg = d3.select("body").append("svg")
           .attr("width",  width  + margin.left + margin.right)
@@ -67,7 +56,7 @@
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      d3.csv("https://raw.githubusercontent.com/corlyleung/DiversityVisualization/master/cat_10year_line/line.csv", function (error, data) {
+      d3.csv("https://raw.githubusercontent.com/corlyleung/DiversityVisualization/master/retention_prof_gender/line.csv", function (error, data) {
 
         var labelVar = 'Label';
         var varNames = d3.keys(data[0]).filter(function (key) { return key !== labelVar;});
@@ -77,7 +66,7 @@
           return {
             name: name,
             values: data.map(function (d) {
-              return {name: name, label: d[labelVar], value: +d[name]};
+              return {name: name, label: d[labelVar], value:+d[name]};
             })
           };
         });
@@ -105,7 +94,7 @@
             .attr("y", 6)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
-            .text("Number of Rounds");
+            .text("Rentention");
 
         var series = svg.selectAll(".series")
             .data(seriesData)
@@ -166,8 +155,8 @@
             trigger: 'manual',
             html : true,
             content: function() { 
-              return "Quarter: " + d.label + 
-                     "<br/>Rounds: " + d3.format(",")(d.value ? d.value: d.y1 - d.y0); }
+              return "Class: " + d.label //;}
+                    +"<br/>Retention: " + d3.format(",")(d.value ? d.value: d.y1 - d.y0); }
           });
           $(this).popover('show')
         }

@@ -17,20 +17,9 @@
         shape-rendering: crispEdges;
       }
     </style>
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-45101494-1']);
-    _gaq.push(['_setDomainName', 'delimited.io']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
   </head>
   <body>
-    <h2 style="padding-left:60px;">TPercentage of Female in Different Tracks</h2>
+    <h2 style="padding-left:60px;">Percentage of Female in Different Tracks</h2>
     <script src="lib/d3.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="lib/bootstrap.js"></script>
@@ -67,7 +56,7 @@
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      d3.csv("https://raw.githubusercontent.com/corlyleung/DiversityVisualization/master/10year_line/line.csv", function (error, data) {
+      d3.csv("https://raw.githubusercontent.com/corlyleung/DiversityVisualization/master/cat_10year_line/line.csv", function (error, data) {
 
         var labelVar = 'Label';
         var varNames = d3.keys(data[0]).filter(function (key) { return key !== labelVar;});
